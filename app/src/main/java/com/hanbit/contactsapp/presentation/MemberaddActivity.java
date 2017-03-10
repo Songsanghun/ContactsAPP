@@ -1,8 +1,8 @@
 package com.hanbit.contactsapp.presentation;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,8 +17,9 @@ public class MemberaddActivity extends AppCompatActivity {
         findViewById(R.id.btGo).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Toast.makeText(MemberaddActivity.this,"Go LIST",Toast.LENGTH_LONG).show();
-                startActivity(new Intent(MemberaddActivity.this,MemberlistActivity.class));
+                Toast.makeText(MemberaddActivity.this,"Go Detail!!",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(MemberaddActivity.this, MemberlistActivity.class));
+
             }
         });
     }
