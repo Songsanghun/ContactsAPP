@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,32 +23,42 @@ import com.hanbit.contactsapp.service.ListService;
 
 import java.util.ArrayList;
 
+import static com.hanbit.contactsapp.R.id.mList;
+
 public class MemberlistActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memberlist);
-        ListView mList = (ListView) findViewById(R.id.mList);
+        final ListView listView = (ListView) findViewById(mList);
         final MemberBean member=new MemberBean();
-        mList.setAdapter(new MemberAdapter(null,this));
-        findViewById(R.id.btGo).setOnClickListener(new View.OnClickListener() {
+        final MemberList mlist=new MemberList(MemberlistActivity.this);
+        ListService service=new ListService() {
             @Override
-            public void onClick(View v) {
-                final MemberList mlist=new MemberList(MemberlistActivity.this);
-                ListService service=new ListService() {
-                    @Override
-                    public ArrayList<?> list() {
-                        ArrayList<?>list = mlist.list("SELECT _id AS id,name,phone,age,address,salary FROM Member;");
-                        return list;
-                    }
-                };
-                ArrayList<?>list=service.list();
-                Toast.makeText(MemberlistActivity.this, ((MemberBean)list.get(0)).getName(), Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(MemberlistActivity.this,MemberdetailActivity.class);
-                intent.putExtra("id","");
+            public ArrayList<?> list() {
+                ArrayList<?>list = mlist.list("SELECT _id AS id,name,phone,age,address,salary FROM Member;");
+                return list;
+            }
+        };
+        ArrayList<?>list=service.list();
+        Toast.makeText(MemberlistActivity.this, ((MemberBean)list.get(0)).getName(), Toast.LENGTH_SHORT).show();
+        listView.setAdapter(new MemberAdapter(list,this));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int i, long l) {
+                MemberBean member = (MemberBean)listView.getItemAtPosition(i);
+                Intent intent = new Intent(MemberlistActivity.this,MemberdetailActivity.class);
+                intent.putExtra("id",member.getId());
                 startActivity(intent);
             }
         });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                return false;
+            }
+        });
+
     }
     class MemberList extends ListQuery{
         public MemberList(Context context) {

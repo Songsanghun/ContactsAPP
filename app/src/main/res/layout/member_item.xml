@@ -22,7 +22,7 @@
         android:id="@+id/tvPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/profileImg"
+        android:layout_toRightOf="@id/tvName"
         android:textSize="15dp"
         android:textStyle="normal"/>
 
