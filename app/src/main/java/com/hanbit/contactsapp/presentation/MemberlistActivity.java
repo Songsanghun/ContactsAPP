@@ -27,8 +27,9 @@ public class MemberlistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memberlist);
-        ListView mlist = (ListView) findViewById(R.id.mList);
+        ListView mList = (ListView) findViewById(R.id.mList);
         final MemberBean member=new MemberBean();
+        mList.setAdapter(new MemberAdapter(null,this));
         findViewById(R.id.btGo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
