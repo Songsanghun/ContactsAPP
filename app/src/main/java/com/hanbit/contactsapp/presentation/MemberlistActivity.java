@@ -119,7 +119,7 @@ public class MemberlistActivity extends AppCompatActivity {
         public View getView(int i, View v, ViewGroup g) {
           ViewHolder holder;
             if(v==null){
-                v=inflater.inflate(R.layout.member_item.null);
+                v=inflater.inflate(R.layout.member_item,null);
                 holder=new ViewHolder();
                 holder.profileImg= (ImageView) v.findViewById(R.id.profileImg);
                 holder.tvName = (TextView) v.findViewById(R.id.tvName);
