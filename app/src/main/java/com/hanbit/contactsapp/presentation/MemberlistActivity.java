@@ -6,7 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hanbit.contactsapp.R;
@@ -21,6 +27,7 @@ public class MemberlistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memberlist);
+        ListView mlist = (ListView) findViewById(R.id.mList);
         final MemberBean member=new MemberBean();
         findViewById(R.id.btGo).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +36,8 @@ public class MemberlistActivity extends AppCompatActivity {
                 ListService service=new ListService() {
                     @Override
                     public ArrayList<?> list() {
-                        return mlist.list("SELECT _id AS id,name,phone,age,address,salary FROM Member;");
+                        ArrayList<?>list = mlist.list("SELECT _id AS id,name,phone,age,address,salary FROM Member;");
+                        return list;
                     }
                 };
                 ArrayList<?>list=service.list();
@@ -67,5 +75,69 @@ public class MemberlistActivity extends AppCompatActivity {
             }
             return list;
         }
+    }
+    class MemberAdapter extends BaseAdapter{
+        ArrayList<?> list;
+        Context context;
+        LayoutInflater inflater;
+        private int[] photos={
+          R.drawable.cupcake,
+          R.drawable.donut,
+          R.drawable.eclair,
+          R.drawable.froyo,
+          R.drawable.gingerbread,
+          R.drawable.honeycomb,
+          R.drawable.icecream,
+          R.drawable.jellybean,
+          R.drawable.kitkat,
+          R.drawable.lollipop,
+
+        };
+
+        public MemberAdapter(ArrayList<?> list, Context context) {
+            this.list = list;
+            this.inflater = LayoutInflater.from(context);
+        }
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return list.get(i);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+        @Override
+        public View getView(int i, View v, ViewGroup g) {
+          ViewHolder holder;
+            if(v==null){
+                v=inflater.inflate(R.layout.member_item.null);
+                holder=new ViewHolder();
+                holder.profileImg= (ImageView) v.findViewById(R.id.profileImg);
+                holder.tvName = (TextView) v.findViewById(R.id.tvName);
+                holder.tvPhone = (TextView) v.findViewById(R.id.tvPhone);
+                v.setTag(holder);
+            }else {
+                holder = (ViewHolder) v.getTag();
+
+            }
+            holder.profileImg.setImageResource(photos[i]);
+            holder.tvName.setText(((MemberBean)list.get(i)).getName());
+            holder.tvPhone.setText(((MemberBean) list.get(i)).getPhone());
+            return v;
+        }
+
+    }
+    static class ViewHolder{
+        ImageView profileImg;
+        TextView tvName;
+        TextView tvPhone;
     }
 }
