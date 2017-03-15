@@ -58,8 +58,8 @@ public class MemberlistActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
+
     class MemberList extends ListQuery{
         public MemberList(Context context) {
             super(context);
@@ -82,7 +82,6 @@ public class MemberlistActivity extends AppCompatActivity {
                         bean.setSalary(cursor.getString(cursor.getColumnIndex("salary")));
                         list.add(bean);
                     }while(cursor.moveToNext());
-
                 }
             }
             return list;
@@ -138,7 +137,6 @@ public class MemberlistActivity extends AppCompatActivity {
                 v.setTag(holder);
             }else {
                 holder = (ViewHolder) v.getTag();
-
             }
             holder.profileImg.setImageResource(photos[i]);
             holder.tvName.setText(((MemberBean)list.get(i)).getName());

@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="ID"
+            android:text="NAME"
             android:textSize="15dp"
             android:layout_marginLeft="20dp"
             />
@@ -59,7 +59,7 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="ID"
+            android:text="PHONE"
             android:textSize="15dp"
             android:layout_marginLeft="20dp"
             />
@@ -79,7 +79,7 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="ID"
+            android:text="AGE"
             android:textSize="15dp"
             android:layout_marginLeft="20dp"
             />
@@ -99,7 +99,7 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="ID"
+            android:text="ADDRESS"
             android:textSize="15dp"
             android:layout_marginLeft="20dp"
             />
@@ -119,7 +119,7 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="ID"
+            android:text="SALARY"
             android:textSize="15dp"
             android:layout_marginLeft="20dp"
             />
@@ -141,14 +141,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="전화걸기"
+            android:text="CALL"
             />
         <Button
-            android:id="@+id/btPhone"
+            android:id="@+id/btDial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="전화번호보기"
+            android:text="DIAL"
             />
     </LinearLayout>
     <LinearLayout
